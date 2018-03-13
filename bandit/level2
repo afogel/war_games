@@ -1,0 +1,19 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit2
+set password CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+# spaces in the filename contains password
+expect "~"
+send -- "cat spaces\\ in\\ this\\ filename\r"
+#> UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+interact
