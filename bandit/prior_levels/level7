@@ -1,0 +1,19 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit7
+set password HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# checkout directory
+expect "~"
+send -- "ls -a\r"
+
+expect "~"
+send -- "cat data.txt | grep millionth\r"
+# > millionth	cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+interact
