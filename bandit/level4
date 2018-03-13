@@ -1,0 +1,30 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit4
+set password pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# Level Goal
+# The password for the next level is stored in the only human-readable file in 
+# the inhere directory.
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+expect "~"
+send -- "cd inhere\r"
+
+# `find -type f` lists all files in the current directory
+# we then pipe the file list into the file tool using the xargs command
+# 'find | xargs file\r'
+# This reveals that the only ASCII text file is file07
+expect "~"
+send -- "cat ./-file07\r"
+# >koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+
+interact
