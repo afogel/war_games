@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit8
+set password cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# Level Goal
+# The password for the next level is stored in the file data.txt and is the only 
+# line of text that occurs only once
+
+# checkout directory
+expect "~"
+send -- "ls -a\r"
+
+# uniq only filters out duplicates if the lines are next to each other
+# Therefore, it's best to sort the lines first before piping the new list into
+# uniq.
+# Finally, include the -u flag in order to only return unique values
+expect "~"
+send -- "sort data.txt |  uniq -u\r"
+# > UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+interact
