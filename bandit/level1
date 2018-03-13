@@ -1,0 +1,18 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit1
+set password boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+# inspect file -- note that you have to use ./ infront b/c otherwise (-) acts as 
+# an alias for stdin
+expect "~"
+send -- "cat ./-\r"
+interact
