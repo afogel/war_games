@@ -1,0 +1,24 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit11
+set password IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+# reading the article on ROT13 actually listed the answer, but a bit of digging
+# on `tr` lead to translate most of it.
+# All characters you want to translate must be included in both strings
+# The mapping is 1:1.
+expect "~"
+send -- "cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'\r"
+
+#> The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu 
+
+interact
