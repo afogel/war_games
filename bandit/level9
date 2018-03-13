@@ -1,0 +1,28 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit9
+set password UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# Level Goal
+# The password for the next level is stored in the file data.txt in one of the
+# few human-readable strings, beginning with several ‘=’ characters.
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+# catting the data.txt, we see that it's totally incomprehensible
+# upon inspection of the file (using `file data.txt`), data.txt is categorized as
+# a data file
+# Using `strings data.txt` provided more comprehensible output, so the answer was a
+# single grep away
+expect "~"
+send -- "strings data.txt | grep ===\r"
+# > truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+interact
