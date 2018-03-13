@@ -1,0 +1,39 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit5
+set password koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# Level Goal
+# The password for the next level is stored in a file somewhere under the inhere
+# directory and has all of the following properties:
+
+# human-readable
+# 1033 bytes in size
+# not executable
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+expect "~"
+send -- "cd inhere\r"
+
+# -print0 formats the output to use a null character as a separator. This allows 
+# the files with whitespaces or other reserved characters to be read by xargs correctly,
+# thus passing each file path into the `file` command correctly.
+'find . -type f -print0 | xargs -0 file'
+# This pops out a really long list, but makes it clear what the files' types are
+
+# By adding the -size flag, we're able to search for files that match our parameter size
+'find . -type f -size 1033c -print0 | xargs -0 file'
+# > ./maybehere07/.file2
+# Now, use xargs to pip that filename directly into cat
+'find . -type f -size 1033c -print0 | xargs -0 cat'
+# DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+interact
