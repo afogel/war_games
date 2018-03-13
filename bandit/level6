@@ -1,0 +1,35 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit6
+set password DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# Level Goal
+# The password for the next level is stored somewhere on the server and has all 
+# of the following properties:
+
+# owned by user bandit7
+# owned by group bandit6
+# 33 bytes in size
+
+# checkout directory
+expect "~"
+send -- "ls -a\r"
+
+# Navigate to root
+expect "~"
+send -- "cd /\r"
+
+# using the group and user flags in find errored out, so instead, pipe to `ls -l`
+# ls -l lists the user permissions
+# after ls -l, grep for bandit6 to narrow the output
+'find -type f -size 33c -print0 | xargs -0 ls -l | grep bandit6'
+# > -rw-r----- 1 bandit7  bandit6  33 Dec 28 14:34 ./var/lib/dpkg/info/bandit7.password
+# `cat ./var/lib/dpkg/info/bandit7.password`
+# > HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+interact
