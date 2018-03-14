@@ -3,13 +3,15 @@
 set host bandit.labs.overthewire.org
 set user bandit18
 set password kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
-spawn ssh -p 2220 $user@$host
+spawn ssh -p 2220 $user@$host cat .bashrc
 expect "This is a OverTheWire game server."
 expect "password"
 send -- "$password\r"
 
-# checkout directory
-# expect "~"
-# send -- "ls\r"
+# this reveals that the bashrc immediately exits
+spawn ssh -p 2220 $user@$host cat readme
+expect "password"
+send -- "$password\r"
+# IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 
 interact
