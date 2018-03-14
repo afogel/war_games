@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit17
+set ssh_key ssh/login_18.txt
+spawn ssh -p 2220 -i $ssh_key $user@$host
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+expect "~"
+send -- "diff passwords.new passwords.old"
+# 6vcSC74ROI95NqkKaeEC2ABVMDX9TyUr
+interact
