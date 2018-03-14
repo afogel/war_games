@@ -1,0 +1,30 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit13
+set password 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# Level Goal
+# The password for the next level is stored in /etc/bandit_pass/bandit14 and can
+# only be read by user bandit14. For this level, you don’t get the next password, 
+# but you get a private SSH key that can be used to log into the next level. 
+# Note: localhost is a hostname that refers to the machine you are working on
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+# do some recursive freaky shit - i.e. ssh into localserver
+# Thanks for the hint, otw :)
+expect "~"
+send -- "ssh -i ./sshkey.private bandit14@localhost\r"
+
+expect "~"
+send -- "cat  /etc/bandit_pass/bandit14\r"
+#> 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+interact
