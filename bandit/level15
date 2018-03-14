@@ -20,4 +20,12 @@ send -- "$password\r"
 expect "~"
 send -- "ls -a\r"
 
+# IGN_EOF flag is used to inhibit shutting down the connection when end of file 
+# is reached in the input.
+expect "~"
+send -- "openssl s_client -ign_eof -connect localhost:30001\r"
+
+expect '---'
+send -- "BfMYroe26WYalil77FoDi9qh59eK5xNr\r"
+#> cluFn7wTiGryunymYOu4RcffSxQluehd
 interact
