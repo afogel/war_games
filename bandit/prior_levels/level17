@@ -11,5 +11,5 @@ send -- "ls\r"
 
 expect "~"
 send -- "diff passwords.new passwords.old"
-# 6vcSC74ROI95NqkKaeEC2ABVMDX9TyUr
+# kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
 interact
