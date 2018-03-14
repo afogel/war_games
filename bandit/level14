@@ -1,0 +1,30 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit14
+set password 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# Level Goal
+# The password for the next level can be retrieved by submitting the password of
+# the current level to port 30000 on localhost.
+
+# checkout directory
+expect "~"
+send -- "ls -a\r"
+
+expect "~"
+send -- "telnet localhost 30000\r"
+
+expect "Trying"
+expect "Trying"
+expect "Connected"
+expect "Escape character is '^]'."
+send -- "4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e\r"
+
+# >BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+interact
