@@ -12,4 +12,17 @@ send -- "$password\r"
 expect "~"
 send -- "ls\r"
 
+expect "~"
+send -- "ls /etc/cron.d/ \r"
+
+expect "~"
+send -- "cat /etc/cron.d/cronjob_bandit22 \r"
+
+expect "~"
+send -- "cat /usr/bin/cronjob_bandit22.sh \r"
+
+expect "~"
+send -- "cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv \r"
+
+# Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 interact
