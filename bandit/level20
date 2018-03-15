@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+
+set host bandit.labs.overthewire.org
+set user bandit20
+set password GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+spawn ssh -p 2220 $user@$host
+expect "This is a OverTheWire game server."
+expect "password"
+send -- "$password\r"
+
+# checkout directory
+expect "~"
+send -- "ls\r"
+
+# TMUX FUNNNNN: http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/
+# NetCat FUNNNN: https://lifehacker.com/202271/roll-your-own-servers-with-netcat
+# this procedure will just be outlined, if you will
+# `tmux` a new session
+# split into a second pane
+# in pane one, start netcat server on a given port, e.g. `nc -l -p 6667`
+# in same pane, enter $password (i.e. GbKksEFF4yrVs6il55v6gwY5aVje5f0j) and enter
+# in pane 2, run `./suconnect 6667`. It should do the thing. Good game, sirs
+
+# >gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+interact
