@@ -1,8 +1,8 @@
 #!/usr/bin/expect
 
 set host bandit.labs.overthewire.org
-set user bandit[ENTER LEVEL NUMBER]
-set password [ENTER PASSWORD]
+set user bandit21
+set password gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
 spawn ssh -p 2220 $user@$host
 expect "This is a OverTheWire game server."
 expect "password"
